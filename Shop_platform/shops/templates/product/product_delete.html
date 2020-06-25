@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<form method="POST">
+
+		{% csrf_token %}
+		<p>Do you want to delete {{product.name}} ? </p>
+		<input type="submit" value="Delete">
+		<a href="{% url 'shops:detail-shop' shop.slug %}">Annuler</a>
+
+	</form>
+</body>
+{% endblock %}
+</html>

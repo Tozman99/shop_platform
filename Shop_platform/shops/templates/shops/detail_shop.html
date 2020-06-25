@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<p> Hello {{request.user}}</p>
+
+	{% if profile == shop.owner %}
+		<p> Voici Votre Shop : {{shop.name}}</p>
+	{% else %}
+		Voici {{shop.name}}  cree par {{shop.owner}}
+		
+	{% endif %}
+
+	{% for product in products %}
+
+		<p><a href="{% url 'shops:detail-product' shop.slug product.slug %}">{{product.name}}</a> - {{product.price}} - {{product.description}}</p>
+	{% endfor %}
+	{% if profile == shop.owner %}
+	<p><a href="{% url 'shops:create-product' %}">Create Product</a></p>
+
+	{% endif %}
+</body>
+{% endblock %}
+</html>

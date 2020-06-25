@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	
+	{% for shop in shops %}
+
+		<p><a href="{% url 'shops:detail-shop' shop.slug %}" >{{shop.name}}</a></p>
+
+	{% endfor %}
+
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<h2>Here your order {{request.user}}, </h2>
+	
+	{% for order in orders.values %}
+
+	{% for product in order.products %}
+		<p>{{product.name}} - {{product.price}}</p>
+
+	{% endfor %}
+	<p>{{order.price}} euros</p>
+
+	<div>{{order}}</div>
+
+	<hr></hr>
+
+	{% endfor %}
+	
+
+</body>
+{% endblock %}
+</html>

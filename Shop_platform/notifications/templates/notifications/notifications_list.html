@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<h2>Here your order {{request.user}}, </h2>
+	{% if notifications %}
+	{% for notification in notifications %}
+
+	
+		
+		{% if notification.type == "order" %}
+			<div><small>{{ notification.message }}</small></div>
+			<a href="{% url 'orders:order_list' %}">Go Check your order</a>
+
+		{% elif notification.type == "sell" %}
+
+			<div><small>{{ notification.message }}</small></div>
+
+
+		{% endif %}
+
+
+	{% endfor %}
+
+	{% else %}
+		<div><small>You have no notification yet !!!</small></div>
+
+	{% endif %}
+</body>
+{% endblock %}
+
+
+</html>
+
+

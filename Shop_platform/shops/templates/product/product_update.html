@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<p> Hello {{request.user}}</p>
+
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="modify">
+		
+	</form>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,35 @@
+1) Create an order when the shoplist has been created asynchronously ( celery/ flower ) => easy
+
+Order instance must have : 
+				
+	- an address instance as field
+	- an ID
+	- Boolean: paid or not 
+	- customer 
+	- date 
+
+!!! a customer can buy several items and those can be from different Shop
+
+Solutions : find one
+
+
+
+2) Create a Notification System Where the seller can receive message if he sells something => don't know                         
+        The customer should also receive a notification and see his order in a specific page 
+
+
+3) Create Payments instance with Stripe API => easy
+
+Expl : The goal is to get the account of the Seller and the customer , 
+	then Allow secure Transaction ( check the balance of the customer account )
+	 Finally create a transaction from customer to seller (Don't forget the Front with payment form ...)
+
+	 Then Create A PDF for the bill
+
+4) Allow customer to refund, allow seller to make reduction => easy
+
+5) Make an embed search bar in the home page => Really Easy
+
+6) Create a cha room messenger where customer and seller can talk about the order. => Seems Difficult but Doable
+
+7) Make Analytics for seller => Easy

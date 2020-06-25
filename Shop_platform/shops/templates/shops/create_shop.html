@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+</head>
+
+{% block content %}
+<body>
+	<p> Hello {{request.user}}</p>
+
+	{{request.session}}
+	<form method="POST">
+		{% csrf_token %}
+	{% if products|length != 0 %}	
+		<div value="{{products|length}}" id="products-length">
+		{% for product in products %}
+
+		<p id="name-{{forloop.counter0}}" value="{{product.name}} sold by {{product.seller}}">{{product.name}} - {{product.price}} - {{product.pk}}</p>
+		
+		
+			{% comment %}
+				<button class="close" aria-label="Close" value="{{product.pk}}" type="submit" id="{{product.pk}}" name="id" style="{text-align: center;}">Delete</button>
+			{% endcomment %}
+
+		<span>Quantity
+			<span id="quantity-{{ forloop.counter0 }}" value="{{product.price}}"> {{product.quantity}} </span>
+			<ion-icon id="up-{{ forloop.counter0 }}" name="caret-up-outline"></ion-icon>
+			<ion-icon id="down-{{ forloop.counter0 }}" name="caret-down-outline"></ion-icon>
+			<span id="price-{{ forloop.counter0 }}" >{{product.price}}</span>
+		
+		</span>
+		<input type="hidden" value="test-{{forloop.counter0}}" name="{{product.name}}" >
+		{% endfor %}
+
+		<input type="hidden" value="order" name="panier" id="panier">
+		<input type="submit" value="Create an Order" onclick="changeValue()">
+		</form>
+	{% else %}
+		<p> votre panier est vide </p>
+
+	{% endif %}
+
+	</div>
+
+	<p>Total: <span id="TotalCost">{{total_cost}}<span>euros </p>
+
+<script>
+
+	// take as argument an event 
+
+
+	let productsLength = "{{products|length}}"
+	productsLength = parseInt(productsLength);
+	let finalBill = 0;
+
+	function changeHtmlQuantity(id, content){
+
+		document.getElementById("quantity-"+id).innerHTML = content.toString()
+	};
+
+	function changeHtmlPrice(id, content){
+
+		document.getElementById("price-"+id).innerHTML = content.toString()
+	};
+
+	const productQuantity = {};
+
+	for (let i = 0; i < productsLength; i++){
+		let productName = document.getElementById("name-"+i).getAttribute("value");
+		productQuantity[productName] = "1";
+
+	};
+
+	for (let i = 0; i < productsLength; i++){
+
+		let btnUp = document.getElementById("up-"+i)
+		let btnDown = document.getElementById("down-"+i)
+		let quantity = document.getElementById("quantity-"+i).innerHTML;
+		quantityHtml = quantity
+		quantity = parseInt(quantity);
+		let productName = document.getElementById("name-"+i).getAttribute("value");
+		
+		if (quantity >= 1){
+					
+					btnUp.addEventListener("click", function(){
+						quantity++
+						//debugger;
+					changeHtmlQuantity(i, quantity)
+
+					priceValue = document.getElementById("quantity-"+i).getAttribute("value")
+					price = priceCalculation(priceValue, quantity)
+					changeHtmlPrice(i, price)
+					productQuantity[productName] = quantity.toString()
+					});
+
+					btnDown.addEventListener("click", function(){
+						quantity--
+						//debugger;
+						changeHtmlQuantity(i, quantity)
+						priceValue = document.getElementById("quantity-"+i).getAttribute("value")
+						price = priceCalculation(priceValue, quantity)
+						changeHtmlPrice(i, price)
+						productQuantity[productName] = quantity.toString()
+					});
+
+
+			}
+
+		function changeValue(){
+
+		document.getElementById("panier").value = updateObject(productQuantity)
+	}
+	updateObject(productQuantity)
+
+	};
+
+
+	function totalCalculation(quantity, price){
+		let totalBill = 0
+		let bill = quantity * price 
+		totalBill += bill;
+
+		return totalBill
+
+	};
+	
+
+	function priceCalculation(price, quantity){
+
+		let priceUnique = parseFloat(price)
+		let priceChanged = priceUnique * quantity
+		
+		priceChanged = priceChanged.toString()
+		
+		return priceChanged
+
+	};
+
+	function updateObject(obj){
+		
+		obj = JSON.stringify(obj)
+		
+		return obj
+	};
+
+	
+</script>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+	<p> Hello {{request.user}}</p>
+
+	<p>{{product.name}} - product.price</p>
+	<img src="{{product.image.url}}" alt="{{product.name}}">
+
+	<p>{{product.description}}</p>
+	<p>Sold by {{product.seller}}</p>
+
+	{% if product.seller.user == request.user %}
+
+	<a href="{% url 'shops:update-product' product.shop.slug product.slug %}">modify</a>
+	<a href="{% url 'shops:delete-product' product.shop.slug product.slug %}">Remove</a>
+
+	{% else %}
+	<form method="POST">
+		{% csrf_token %}
+	<button type="submit">Add to Cart</button>
+	</form>
+	{% endif %}
+	
+</body>
+{% endblock %}
+</html>

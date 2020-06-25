@@ -1,0 +1,27 @@
+{% block content%}
+	
+	<img src="{{person.image.url}}">
+	<p>
+		<label>Username:</label>
+
+		{{person.user}}
+	</p>
+	<p>
+		{{person.user.email}}
+		{{person.image}}
+	</p>
+	<form method="POST" enctype="multipart/form-data">
+	
+		{% csrf_token %}
+			{{form.as_p }}
+			<input class="le_btn" value="Submit" type="submit">
+	</form>
+	<div class="div_contain">
+		<a href="{% url 'users:Change_password' %} ">Change your password</a>
+
+	</div>
+
+
+
+{% endblock %}
+

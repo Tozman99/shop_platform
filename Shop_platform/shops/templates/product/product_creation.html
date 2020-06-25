@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+{% block content %}
+<body>
+
+	<p>Information: {{shop.owner}} - {{shop.name}}</p>
+	<form method="POST"  enctype="multipart/form-data">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="Create product">
+	</form>
+		
+
+</body>
+{% endblock %}
+</html>
