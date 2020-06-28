@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "users",
     "notifications",
     "chat",
-    "shop_platform",
+    "shop_platform_app",
 ]
 
 MIDDLEWARE = [
