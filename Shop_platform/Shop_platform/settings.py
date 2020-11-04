@@ -20,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v!ni68#1a8b^s=tv_2r-+a1i9%k+95l^nb3dek2@wo55d)cwe1'
+#SECRET_KEY = 'v!ni68#1a8b^s=tv_2r-+a1i9%k+95l^nb3dek2@wo55d)cwe1'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ["0.0.0.0"]
+ALLOWED_HOSTS = ["0.0.0.0", 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -44,6 +46,10 @@ INSTALLED_APPS = [
     "notifications",
     "chat",
     "shop_platform_app",
+    "api",    
+    'rest_framework',
+
+
 ]
 
 MIDDLEWARE = [
@@ -93,6 +99,14 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -135,9 +149,9 @@ USE_TZ = True
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = "jacktoms000@gmail.com"
+EMAIL_HOST_USER = "jackiet085@gmail.com"
 
-EMAIL_HOST_PASSWORD = "Misukage69"
+EMAIL_HOST_PASSWORD = "abcd12345$"
 
 EMAIL_HOST = 'smtp.gmail.com'
 

@@ -18,12 +18,15 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from .settings import MEDIA_URL, MEDIA_ROOT 
 from django.conf.urls.static import static
+from shop_platform_app.views import home_view
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("users.urls")),
-    path("home/", shop_platform_app.views.home_view, name="home_view"),
+    path("home/", home_view, name="home_view"),
+    path("api/", include("api.urls", namespace="shops-api")),
     path("shops/", include("shops.urls")),
     path("orders/", include("orders.urls")),
     path("notifications/", include("notifications.urls")),

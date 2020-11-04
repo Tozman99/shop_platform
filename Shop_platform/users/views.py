@@ -40,7 +40,9 @@ def User_Registration_View(request):
 			send_mail("Hello there", "Hello, This is Your username: {} and your password {}".format(request.POST["username"], request.POST["password1"]), EMAIL_HOST_USER, ["karim.sadiki@gmail.com"])
 
 			#return redirect("login")
-		return HttpResponseRedirect("../login")
+			return HttpResponseRedirect("../login")
+		
+		return render(request, "users/signup.html", {"form":form})
 
 	return render(request, "users/signup.html", {"form":form})
  

@@ -42,11 +42,11 @@ class Product(models.Model):
 	description = models.TextField(max_length=200)
 	category = models.CharField(max_length=10, choices=category_product, default="Sport")
 	quantity = models.IntegerField(default=1)
-	shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+	shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="products")
 
 	def __str__(self):
 
-		return f"{self.name} sold by {self.shop} id: {self.pk}"
+		return f"{self.pk} :{self.name}"
 
 	def save(self, *args, **kwargs):
 

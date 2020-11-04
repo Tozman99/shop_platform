@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shop.models import Product
+from shops.models import Product
 
 # Create your views here.
 
